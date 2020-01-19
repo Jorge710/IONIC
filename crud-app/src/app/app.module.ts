@@ -20,7 +20,15 @@ import { environment } from '../environments/environment'; //importa las credenc
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

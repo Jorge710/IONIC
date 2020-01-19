@@ -1,51 +1,50 @@
 import { Injectable } from '@angular/core';
-//
-import { Appointment } from './Apointment';
+import { Appointment } from '../shared/Appointment';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppintmentService {
 
+export class AppointmentService {
   bookingListRef: AngularFireList<any>;
   bookingRef: AngularFireObject<any>;
+
   constructor(private db: AngularFireDatabase) { }
 
-  //create
-  createBooking(apt: Appointment){
+  // Create
+  createBooking(apt: Appointment) {
     return this.bookingListRef.push({
       name: apt.name,
       email: apt.email,
       mobile: apt.mobile
-    });
+    })
   }
 
-  //obtener un elemento
-  getBooking(id: string){
+  // Get Single
+  getBooking(id: string) {
     this.bookingRef = this.db.object('/appointment/' + id);
     return this.bookingRef;
   }
 
-  //obtener una lista
-  getBookinglist(){
+  // Get List
+  getBookingList() {
     this.bookingListRef = this.db.list('/appointment');
-    return this.bookingRef;
+    return this.bookingListRef;
   }
 
-  //actualizar
-  updateBooking(id, apt:Appointment){
+  // Update
+  updateBooking(id, apt: Appointment) {
     return this.bookingRef.update({
       name: apt.name,
       email: apt.email,
       mobile: apt.mobile
-    });
+    })
   }
 
-  //eliminar
-
-  deleteBooking(id: string){
-    this.bookingRef = this.db.object('/appointment/' +id);
+  // Delete
+  deleteBooking(id: string) {
+    this.bookingRef = this.db.object('/appointment/' + id);
     this.bookingRef.remove();
   }
 }

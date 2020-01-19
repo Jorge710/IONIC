@@ -4,3 +4,4 @@ export class Appointment {
     email: string;
     mobile: number;
 }
+
